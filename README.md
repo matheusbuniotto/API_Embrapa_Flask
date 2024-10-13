@@ -30,10 +30,17 @@ A API estará disponível em http://localhost:5000
 - /api/docs: Visualizar a documentação da API
 - /api/Comercio: Obter dados de comércio
 - /api/Producao: Obter dados de produção
-- /api/processa/<file_type>: Obter dados de processamento para diferentes tipos de arquivos
-- /api/exp/<file_type>: Obter dados de exportação para diferentes tipos de arquivos
-- /api/imp/<file_type>: Obter dados de importação para diferentes tipos de arquivos
+- /api/processa/<produto>: Obter dados de processamento para diferentes tipos de produto
+- /api/exp/<produto>: Obter dados de exportação para diferentes tipos de produto
+- /api/imp/<produto>: Obter dados de importação para diferentes tipos de produto
   
+Exemplo: colentando dados de Exportação de Uvas http://127.0.0.1:5000/api/exp/Uva 
+Exemplo: colentando dados de Comércio http://127.0.0.1:5000/api/Comercio
+
+Caso prefira ou necessite consumir os arquivos localmente para validação sem acessar o sit da embrapa, utilize o parametro use_local=true
+Exemplo: colentando dados de Exportação de Uvas http://127.0.0.1:5000/api/exp/Uva?use_local=true
+Exemplo: colentando dados de Comércio http://127.0.0.1:5000/api/Comercio?use_local=true
+
 Para informações detalhadas sobre cada endpoint, incluindo parâmetros de consulta e variáveis de caminho, consulte o endpoint /api/docs.
 
 ## Configuração
