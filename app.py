@@ -2,7 +2,7 @@ import os
 
 from flask import Flask, jsonify, request
 
-from processing import get_csv_content, get_csv_content_from_local, process_csv_content
+from src.processing import get_csv_content, get_csv_content_from_local, process_csv_content
 
 app = Flask(__name__)
 
@@ -13,6 +13,7 @@ LOCAL_CSV_DIR = "raw_data"
 def show_status():
     return ('The API is running. Check the docummentation at /api/docs \n' 
             'PT-BR: A API está ativa. Consulte a documentação em /api/docs')
+
 @app.route('/api/docs', methods=['GET'])
 def api_docs():
     """
@@ -83,14 +84,13 @@ def api_docs():
 
     return jsonify(docs)
 
-
 @app.route('/api/Comercio', methods=['GET'])
 def get_comercio_data():
     # Verifiac o parametro use_local
     use_local = request.args.get('use_local', 'false').lower() == 'true'
 
     # Deine o nome do csv
-    csv_filename = "Producao.csv"
+    csv_filename = "Comercio.csv"
 
     if use_local:
         # Usa o csv loacl em caso de use_local=True
