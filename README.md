@@ -34,12 +34,13 @@ A API estará disponível em http://localhost:5000
 - /api/exp/<produto>: Obter dados de exportação para diferentes tipos de produto
 - /api/imp/<produto>: Obter dados de importação para diferentes tipos de produto
 - Todos os endpoints de obtenção de dados aceitam o parametro use_local=true para consumir os arquivos locais, já que o site da embrapa está sujeito a oscilação.
+
 Exemplo: colentando dados de Exportação de Uvas http://127.0.0.1:5000/api/exp/Uva
 
 Exemplo: colentando dados de Comércio http://127.0.0.1:5000/api/Comercio
 
-**Caso prefira ou necessite consumir os arquivos localmente para validação sem acessar o sit da embrapa, utilize o parametro use_local=true
-**
+Caso prefira ou necessite consumir os arquivos localmente para validação sem acessar o sit da embrapa, utilize o parametro use_local=true
+
 Exemplo: colentando dados de Exportação de Uvas http://127.0.0.1:5000/api/exp/Uva?use_local=true
 
 Exemplo: colentando dados de Comércio http://127.0.0.1:5000/api/Comercio?use_local=true
