@@ -23,9 +23,9 @@ def get_csv_content(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        return response.content.decode('utf-8'), None
+        return response.content.decode('utf-8'), url, None
     except requests.RequestException as e:
-        return None, f"Error fetching CSV: {str(e)}"
+        return None, url, f"Error fetching CSV: {str(e)}"
 
 # Função que consome o csv local na pasta raw_data, caso o request da API seja feito com esse paramêtro
 def get_csv_content_from_local(filepath):
@@ -38,8 +38,6 @@ def get_csv_content_from_local(filepath):
 # Função genérica para processamento de todos os CSVs, independente de seu nome ou origem (local ou direto da embrapa)
 def process_csv_content(csv_content_tuple):
     csv_content, filepath, error = csv_content_tuple
-    if error:
-        return {"error": error}
 
     # Get the file name from the filepath
     file_name = os.path.basename(filepath) if filepath else ''
@@ -51,7 +49,7 @@ def process_csv_content(csv_content_tuple):
     csv_file = io.StringIO(csv_content)
     csv_reader = csv.reader(csv_file, delimiter=delimiter)
 
-    headers = next(csv_reader)
+    headers = next(csv_reader, None)
 
     data = []
     for row in csv_reader:

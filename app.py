@@ -1,6 +1,9 @@
-from flask import Flask, jsonify, request
-from processing import get_csv_content, get_csv_content_from_local, process_csv_content
 import os
+
+from flask import Flask, jsonify, request
+
+from processing import get_csv_content, get_csv_content_from_local, process_csv_content
+
 app = Flask(__name__)
 
 BASE_URL = "http://vitibrasil.cnpuv.embrapa.br/download/"
@@ -83,107 +86,117 @@ def api_docs():
 
 @app.route('/api/Comercio', methods=['GET'])
 def get_comercio_data():
-    url = f"{BASE_URL}Comercio.csv"
+    # Verifiac o parametro use_local
+    use_local = request.args.get('use_local', 'false').lower() == 'true'
 
-    # Fetch the CSV content
-    csv_content_tuple = get_csv_content(url)
+    # Deine o nome do csv
+    csv_filename = "Producao.csv"
 
-    # Process the CSV content into JSON
+    if use_local:
+        # Usa o csv loacl em caso de use_local=True
+        filepath = os.path.join(LOCAL_CSV_DIR, csv_filename)
+        csv_content_tuple = get_csv_content_from_local(filepath)
+    else:
+        # Caso contrário, consome direto do site da embrapa
+        url = f"{BASE_URL}{csv_filename}"
+        csv_content_tuple = get_csv_content(url)
+
+    # Processa o CSV
     data = process_csv_content(csv_content_tuple)
 
-    # Return the processed data as a JSON response
+    # Retorna o JSON
     return jsonify(data)
 
 @app.route('/api/Producao', methods=['GET'])
 def get_producao_data():
-    # Check if the 'use_local' query parameter is passed
+    # Verfica o parametro use_local
     use_local = request.args.get('use_local', 'false').lower() == 'true'
 
-    # Define the CSV file name
+    # Define o nome do csv
     csv_filename = "Producao.csv"
 
     if use_local:
-        # Use the CSV file from the local directory
+        # Usa o csv loacl em caso de use_local=True
         filepath = os.path.join(LOCAL_CSV_DIR, csv_filename)
         csv_content_tuple = get_csv_content_from_local(filepath)
     else:
-        # Fetch the CSV file from the URL
+        # Caso contrário, consome direto do site da embrapa
         url = f"{BASE_URL}{csv_filename}"
         csv_content_tuple = get_csv_content(url)
 
-    # Process the CSV content into JSON
+    # Processa o CSV
     data = process_csv_content(csv_content_tuple)
 
-    # Return the processed data as a JSON response
+    # Retorna o JSON
     return jsonify(data)
 
 @app.route('/api/processa/<file_type>', methods=['GET'])
 def get_processa_files(file_type):
-    # Check if the 'use_local' query parameter is passed
+    # Verfica o parametro use_local
     use_local = request.args.get('use_local', 'false').lower() == 'true'
 
-    # Define the CSV file name based on the file_type
+    # Define o nome do csv
     csv_filename = f"Processa{file_type}.csv"
 
     if use_local:
-        # Use the CSV file from the local directory
+        # Usa o csv loacl em caso de use_local=True
         filepath = os.path.join(LOCAL_CSV_DIR, csv_filename)
         csv_content_tuple = get_csv_content_from_local(filepath)
     else:
-        # Fetch the CSV file from the URL
+        # Caso contrário, consome direto do site da embrapa
         url = f"{BASE_URL}{csv_filename}"
         csv_content_tuple = get_csv_content(url)
 
-    # Process the CSV content into JSON
+    # Processa o csv
     data = process_csv_content(csv_content_tuple)
 
-    # Return the processed data as a JSON response
+    # Retorna o JSON
     return jsonify(data)
 
 @app.route('/api/exp/<file_type>', methods=['GET'])
 def get_exportation_files(file_type):
-    # Check if the 'use_local' query parameter is passed
+    # Verfica o parametro use_local
     use_local = request.args.get('use_local', 'false').lower() == 'true'
 
-    # Define the CSV file name based on the file_type
+    # Define o nome do csv
     csv_filename = f"Exp{file_type}.csv"
 
     if use_local:
-        # Use the CSV file from the local directory
+        # Usa o csv loacl em caso de use_local=True
         filepath = os.path.join(LOCAL_CSV_DIR, csv_filename)
         csv_content_tuple = get_csv_content_from_local(filepath)
     else:
-        # Fetch the CSV file from the URL
+        # Caso contrário, consome direto do site da embrapa
         url = f"{BASE_URL}{csv_filename}"
         csv_content_tuple = get_csv_content(url)
 
-    # Process the CSV content into JSON
+    # Processa o CSV para JSON
     data = process_csv_content(csv_content_tuple)
 
-    # Return the processed data as a JSON response
+    # Returna o JSON
     return jsonify(data)
 
 @app.route('/api/imp/<file_type>', methods=['GET'])
 def get_importation_files(file_type):
-    # Check if the 'use_local' query parameter is passed
+    # Verfica o parametro use_local
     use_local = request.args.get('use_local', 'false').lower() == 'true'
 
-    # Define the CSV file name based on the file_type
+    # Define o csv
     csv_filename = f"Imp{file_type}.csv"
 
     if use_local:
-        # Use the CSV file from the local directory
+        # Usa o csv loacl em caso de use_local=True
         filepath = os.path.join(LOCAL_CSV_DIR, csv_filename)
         csv_content_tuple = get_csv_content_from_local(filepath)
     else:
-        # Fetch the CSV file from the URL
+        # Caso contrário, consome direto do site da embrapa
         url = f"{BASE_URL}{csv_filename}"
         csv_content_tuple = get_csv_content(url)
 
-    # Process the CSV content into JSON
+    # Processa o CSV para JSON
     data = process_csv_content(csv_content_tuple)
 
-    # Return the processed data as a JSON response
+    # Returna o JSON
     return jsonify(data)
 
 if __name__ == '__main__':
