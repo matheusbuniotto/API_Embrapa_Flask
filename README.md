@@ -26,13 +26,14 @@ A API estará disponível em http://localhost:5000
 
 
 ## Endpoints da API
-/api/status: Verifica se a API está funcionando
-/api/docs: Visualizar a documentação da API
-/api/Comercio: Obter dados de comércio
-/api/Producao: Obter dados de produção
-/api/processa/<file_type>: Obter dados de processamento para diferentes tipos de arquivos
-/api/exp/<file_type>: Obter dados de exportação para diferentes tipos de arquivos
-/api/imp/<file_type>: Obter dados de importação para diferentes tipos de arquivos
+- /api/status: Verifica se a API está funcionando
+- /api/docs: Visualizar a documentação da API
+- /api/Comercio: Obter dados de comércio
+- /api/Producao: Obter dados de produção
+- /api/processa/<file_type>: Obter dados de processamento para diferentes tipos de arquivos
+- /api/exp/<file_type>: Obter dados de exportação para diferentes tipos de arquivos
+- /api/imp/<file_type>: Obter dados de importação para diferentes tipos de arquivos
+  
 Para informações detalhadas sobre cada endpoint, incluindo parâmetros de consulta e variáveis de caminho, consulte o endpoint /api/docs.
 
 ## Configuração
