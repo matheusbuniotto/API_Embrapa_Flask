@@ -39,7 +39,7 @@ def get_csv_content_from_local(filepath):
 def process_csv_content(csv_content_tuple):
     csv_content, filepath, error = csv_content_tuple
 
-    # Get the file name from the filepath
+    # Pega o nome do arq. no filepath
     file_name = os.path.basename(filepath) if filepath else ''
     file_name_without_extension = os.path.splitext(file_name)[0]
 
