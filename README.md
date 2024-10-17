@@ -24,6 +24,8 @@ Para rodar a API localmente, utilize o comando:
 
 A API estará disponível em http://localhost:5000
 
+A API também está disponível hosteada no vercel pelo link: https://api-embrapa-flask-12iyhzhh0-matheusbuniottos-projects.vercel.app/api/status
+
 
 ## Endpoints da API
 - /api/status: Verifica se a API está funcionando
